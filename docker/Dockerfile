@@ -11,7 +11,7 @@ COPY package.json ./
 RUN npm install
 
 # Copy all the rest of the application files, including src, tsconfig.json, etc.
-COPY . .
+COPY .. .
 
 # Build the application
 RUN npm run build
@@ -20,4 +20,4 @@ RUN npm run build
 EXPOSE 3000
 
 # Command to run the application
-CMD ["npm", "run", "start:dev"]
+CMD ["npm", "run", "start:prod"]
