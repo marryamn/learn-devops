@@ -11,7 +11,7 @@ COPY package.json ./
 RUN npm install
 
 # Copy all the rest of the application files, including src, tsconfig.json, etc.
-COPY .. .
+COPY . .
 
 # Build the application
 RUN npm run build

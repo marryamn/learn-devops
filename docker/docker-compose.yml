@@ -1,10 +1,41 @@
 version: '3'
+#services:
+#  mongodb:
+#    image: mongo:latest
+#    env_file:
+#      - .env
+#    ports:
+#      - 27017:27017
+#  app:
+#    build:
+#      context: ../
+#      dockerfile: docker/Dockerfile
+#    ports:
+#      - "3000:3000"
+#    environment:
+#      - NODE_ENV= production
+
 services:
   app:
     build:
       context: ../
       dockerfile: docker/Dockerfile
     ports:
-      - "3000:3000"
+      - "3000:3000" # Adjust as needed for your app
     environment:
-      - NODE_ENV= production
+      - MONGODB_URI_DOCKER=mongodb://mongo:27017/store
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27027:27017" # Expose MongoDB port
+    env_file:
+      - ../.env
+    volumes:
+      - mongo-data:/data/db # Persistent data storage
+
+volumes:
+  mongo-data:
